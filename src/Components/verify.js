@@ -1,5 +1,4 @@
 import {useState} from 'react';
-import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Cookie from 'js-cookie'
 import axios from 'axios'
@@ -15,6 +14,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
+import {Succ,Err} from '../hocs/toaster'
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 function Copyright(props) {
@@ -53,13 +53,10 @@ export default function Verify({userSignUp, setError, setSuccess, setisAuthentic
             Cookie.set('token', res.data.token)
             localStorage.setItem('token', res.data.token)
             setisAuthenticated({...isAuthenticated, status: true})
-            setSuccess('Succesfully created account!')
-            setError(null)
+            Succ("Successfully created Account")
             setCreated(true)
         }).catch(err => {
-            setError(err.message)
-            setSuccess(null)
-            console.log(err)
+            Err(err.message)
         })
     }
 
@@ -73,17 +70,7 @@ export default function Verify({userSignUp, setError, setSuccess, setisAuthentic
                 throw new Error(res.data)
             }
         }).catch(err => {
-            console.log(err)
-            toast.error(`${err.message}`, {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
-            console.log(err)
+            err(err.message)
             setButtonState(false)
 
         })

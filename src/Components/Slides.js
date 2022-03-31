@@ -8,7 +8,6 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views';
 import {autoPlay} from 'react-swipeable-views-utils';
-import './slides.css';
 import {Link} from 'react-router-dom'
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);

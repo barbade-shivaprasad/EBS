@@ -72,6 +72,7 @@ const App = () => {
 
     return (
         <Router>
+            <ToastContainer/>
             <Navbar setRedirect={setRedirect} setisAuthenticated={setisAuthenticated} isAuthenticated={isAuthenticated} />
             {error ? <Alert key="error" onClose={() => {setError(null)}} className='error br-0' variant="filled" severity="error">
                 {error}            </Alert> : <></>}

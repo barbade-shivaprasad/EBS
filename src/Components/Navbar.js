@@ -1,8 +1,6 @@
 import Cookie from 'js-cookie'
 import {Link} from 'react-router-dom';
 
-import './navbar.css';
-
 const Navbar = ({isAuthenticated, setisAuthenticated, setRedirect}) => {
     const handleButton = () => {
         if (isAuthenticated) {

@@ -101,7 +101,6 @@ export default function SignUp({setisAuthenticated, isAuthenticated, error, setE
     }
     return (
         <>
-        <ToastContainer/>
             <ThemeProvider theme={theme}>
                 <Container component="main" maxWidth="xs" style={{marginBottom: "8rem"}}>
                     <CssBaseline />

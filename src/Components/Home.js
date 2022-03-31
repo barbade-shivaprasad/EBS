@@ -10,7 +10,6 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Posts from './Posts';
 import axios from 'axios';
-import './posts.css'
 
 
 

@@ -1,5 +1,4 @@
 import {useState, useEffect} from 'react';
-import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios'
 import Cookie from 'js-cookie'
@@ -15,7 +14,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
-
+import { Err } from '../hocs/toaster';
 
 const theme = createTheme();
 
@@ -24,17 +23,7 @@ const transport = axios.create({
 })
 export default function Login({setisAuthenticated, isAuthenticated, setError, redirect}) {
     const [buttonstate, setButtonState] = useState(false)
-    const notify = (msg) => {
-        toast.error(`${msg}`, {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-        });
-    }
+    
     const history = useHistory()
     if (isAuthenticated.status) {
         history.push(`/${redirect}`)
@@ -55,7 +44,7 @@ export default function Login({setisAuthenticated, isAuthenticated, setError, re
             }
             else {
                 console.log(res.data)
-                notify(res.data)
+                Err(res.data)
                 setButtonState(false)
             }
         }).catch(err => {
@@ -66,7 +55,7 @@ export default function Login({setisAuthenticated, isAuthenticated, setError, re
     };
 
     return (
-        <>
+        <>  
             <ThemeProvider theme={theme}>
                 <Container component="main" maxWidth="xs" style={{marginBottom: "6rem"}}>
                     <CssBaseline />

@@ -6,6 +6,7 @@ import {useParams} from "react-router-dom";
 import remarkGfm from "remark-gfm";
 import ReactMarkdown from "react-markdown";
 import {useHistory} from "react-router-dom/cjs/react-router-dom.min";
+import {Err,Succ} from '../hocs/toaster'
 
 
 const date = new Date();
@@ -37,17 +38,13 @@ const Event = ({isAuthenticated, setError, setSuccess, setRedirect}) => {
     const [isregistered, setIsRegistered] = useState(false);
     console.log(isregistered);
 
-    console.log(eventDetails)
     const isEventCompleted = () => {
         // let eventDate = eventDetails.updatedAt;
         // console.log("hello world", date.getDate(), date.getMonth(), date.getFullYear(), parseInt(eventDetails?.date.slice(0, 4)), parseInt(eventDetails?.date.slice(5, 7)), parseInt(eventDetails?.date.slice(8, 10)))
-        if (parseInt(eventDetails?.date?.slice(0, 4)) < date.getFullYear()) {
-            return true;
-        }
-        else if (parseInt(eventDetails?.date?.slice(5, 7)) < date.getMonth()) {
-            return true
-        }
-        else if (parseInt(eventDetails?.date?.slice(8, 10)) < date.getDate()) {
+        if(eventDetails !== null){
+
+            let d1 = new Date(eventDetails.date);
+            if(d1 < new Date())
             return true
         }
         return false
@@ -107,29 +104,13 @@ const Event = ({isAuthenticated, setError, setSuccess, setRedirect}) => {
                 console.log("server response", res.data);
                 setIsRegistered(true);
                 // setSuccess("Registration mail sent.")
-
-                toast.success(`Registration mail  sent`, {
-                    position: "top-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                });
+                Succ(res.data)
+                
                 setError(null)
             })
             .catch((err) => {
 
-                toast.error(`${err.message}`, {
-                    position: "top-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                });
+                Err(err.message)
                 setButtonState(false)
                 setIsRegistered(false)
                 console.log(err)

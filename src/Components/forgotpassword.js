@@ -13,7 +13,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
-
+import {Err, Succ} from '../hocs/toaster'
 
 const theme = createTheme();
 
@@ -52,28 +52,12 @@ export default function ForgotPassword({setError, setSuccess, isAuthenticated, s
                 throw new Error(res.data);
             }
 
-            toast.success(`sent mail`, {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
+            Succ('sent mail')
             setButtons({...buttons, verifyButton: false})
             setOtp("")
         }).catch(err => {
 
-            toast.error(`${err.message}`, {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
+            Err(err.message)
             setButtons({...buttons, sendButton: false})
             console.log(err)
         })
@@ -86,27 +70,11 @@ export default function ForgotPassword({setError, setSuccess, isAuthenticated, s
                 throw new Error(res.data);
             }
 
-            toast.success(`OTP verified`, {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
+            Succ('Otp verified!')
             setVerify(true)
             setButtons({...buttons, verifyButton: true})
         }).catch(err => {
-            toast.error(`${err.message}`, {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
+            Err(err.message)
             setButtons({...buttons, verifyButton: false})
             console.log(err)
         })
@@ -124,22 +92,14 @@ export default function ForgotPassword({setError, setSuccess, isAuthenticated, s
                 setError(null)
                 setRedirect(true)
             }).catch(err => {
-                setError(err.message)
+                Err(err.message)
                 setSuccess(null)
                 console.log(err)
             })
         }
         else {
 
-            toast.error(`password mismatched`, {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
+            Err("Password mismatch")
         }
     }
     if (isAuthenticated.status) return <Redirect to='/' />
