@@ -13,6 +13,7 @@ import Navbar from './Components/Navbar';
 import SignUp from './Components/signUp';
 import axios from 'axios';
 import ForgotPassword from './Components/forgotpassword'
+import Loading from './Components/Loading'
 
 import Scanner from './Components/Scanner';
 
@@ -96,7 +97,9 @@ const App = () => {
                 <Route exact path='/resetpassword' >
                     <ForgotPassword notifySuccess={notifySuccess} setisAuthenticated={setisAuthenticated} isAuthenticated={isAuthenticated} error={error} setError={setError} setSuccess={setSuccess} />
                 </Route>
-
+                <Route exact path='/spinner'>
+                    <Loading/>
+                </Route>
                 <Route exact path='/scanner'>
                     <Scanner isAuthenticated={isAuthenticated} setisAuthenticated={setisAuthenticated} />
                 </Route>

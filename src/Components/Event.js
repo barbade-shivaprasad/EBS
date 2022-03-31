@@ -7,6 +7,7 @@ import remarkGfm from "remark-gfm";
 import ReactMarkdown from "react-markdown";
 import {useHistory} from "react-router-dom/cjs/react-router-dom.min";
 import {Err,Succ} from '../hocs/toaster'
+import Loading from "./Loading";
 
 
 const date = new Date();
@@ -120,7 +121,7 @@ const Event = ({isAuthenticated, setError, setSuccess, setRedirect}) => {
         <>
             <ToastContainer />
             {eventDetails == null ? (
-                <>Loading..</>
+                <Loading/>
             ) : (
                 <>
                     <div className="container" style={{minHeight: "20rem"}}>

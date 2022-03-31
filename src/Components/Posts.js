@@ -8,6 +8,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import {Container, Grid} from '@material-ui/core';
 import {Link} from 'react-router-dom';
+import Loading from './Loading'
 
 
 const useStyles = makeStyles({
@@ -27,7 +28,7 @@ const Posts = ({posts, loading}) => {
     useEffect(() => {
     }, [loading])
     if (loading) {
-        return <h2>Loading...</h2>
+        return <Loading/>
     }
     if (posts?.length == 0) return <h1> NO EVENTS</h1>
     // console.log("posts", posts)

@@ -1,6 +1,6 @@
 import './home.css';
 import Slides from './Slides';
-
+import Loading from './Loading';
 import * as React from 'react';
 import {useState, useEffect, useRef} from 'react';
 import PropTypes from 'prop-types';
@@ -98,14 +98,14 @@ const Home = () => {
     }, [])
 
     if (loading) {
-        return <div>Loading...</div>
+        return <Loading/>
     }
 
     return (
 
         <>
             <div className="container-fluid home">
-                {postsOngoing !== undefined && postsUpcoming !== undefined ? <Slides postsOngoing={postsOngoing} postsUpcoming={postsUpcoming} /> : "Loading"}
+                {postsOngoing !== undefined && postsUpcoming !== undefined ? <Slides postsOngoing={postsOngoing} postsUpcoming={postsUpcoming} /> : <Loading/>}
                 {/* Tabs */}
                 <Box sx={{width: '100%'}}>
                     <Box sx={{borderBottom: 1, borderColor: 'divider'}}>

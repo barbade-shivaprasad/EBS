@@ -11,18 +11,17 @@ function Scanner({isAuthenticated}) {
 
         let videoele = document.getElementById('video')
         const qrScanner = new QrScanner(videoele, result => {
+            qrScanner.stop()
             console.log(result)
             if (result) {
                 let a = result.split('-');
                 if (a[0] != "asdhhakdoisauoaidgfiudgfiiau") {
-                    qrScanner.stop()
                     window.alert("Invalid QR")
                 }
                 else {
                     axios.post(`${process.env.REACT_APP_API_URL}/isAttended`, {email: a[1], eventId: a[2]}).then(res => {
                         window.alert(res.data)
                     })
-
 
                 }
             }
