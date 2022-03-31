@@ -1,0 +1,39 @@
+.success{
+    position: sticky;
+    z-index: 3;
+    border-radius: 0 !important;
+    top:0px;
+    background-color: #2e7d32 !important;
+}
+.error{
+    border-radius: 0 !important;
+    background-color: #dc3545 !important;
+    position: sticky;
+    top:0px;
+    z-index: 3;
+}
+
+#video{
+    height: 500px;
+    width: 500px;
+}
+
+.button{
+    height: 2rem;
+    width: 6rem;
+    background-color: #ab47bc;
+    outline: none;
+    border: none;
+    border-radius: 6px;
+    color: #fafafa;
+    font-size: 20px;
+}
+
+.App{
+    display: flex;
+    height: 98vh;
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}

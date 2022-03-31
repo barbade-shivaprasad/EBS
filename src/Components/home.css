@@ -1,0 +1,37 @@
+.home{
+    /* background-color:#fff; */
+    /* background-color: hsl(205, 100%, 96%); */
+
+}
+.align{
+    display: flex;
+    justify-content: center;
+    margin-left: -75px;
+
+}
+.footer{
+    background-color:#303f9f;
+    bottom:0;
+    color:#fff
+}
+
+.sign-in{
+    line-height: 1.75rem !important;
+    margin-top: 24px !important;
+    padding:6px 16px !important;
+    background-color: #1976d2 !important;
+    border-radius: 4px !important;
+    color: white !important;
+}
+.disable-sign-in{
+    line-height: 1.75rem !important;
+    margin-top: 24px !important;
+    padding:6px 16px !important;
+    background-color: #e0e0e0 !important;
+    border-radius: 4px !important;
+    color: #acadad !important;
+    cursor:disabled;
+}
+.login-page{
+    box-shadow: none !important;
+}

@@ -1,0 +1,64 @@
+.title{
+    /* color: black; */
+    font-family: 'Bebas Neue', cursive;
+    font-size: x-large;
+}
+
+.heading {
+    font-size: 2.1rem;
+    letter-spacing: 2px;
+    font-family: 'Bebas Neue', cursive;
+}
+
+.boxdeps{
+    color: rgba(0, 0, 0, 0.54);
+    font-size: 0.875rem;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 400;
+    line-height: 1.43;
+    letter-spacing: 0.01071em;
+    padding: 4px;
+    margin: 0;
+    margin-right: -5px;
+}
+
+.hashtagdisplay{
+    padding-left: 1px;
+    overflow: hidden;
+}
+
+.button{
+    padding: 4px 5px;
+font-size: 0.8125rem;
+color: #3f51b5;
+min-width: 64px;
+box-sizing: border-box;
+transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+font-weight: 500;
+line-height: 1.75;
+border-radius: 4px;
+letter-spacing: 0.02857em;
+text-transform: uppercase;
+border: 0;
+cursor: pointer;
+margin: 0;
+display: inline-flex;
+outline: 0;
+padding: 0;
+position: relative;
+align-items: center;
+border-radius: 0;
+vertical-align: middle;
+-moz-appearance: none;
+justify-content: center;
+text-decoration: none;
+-moz-user-select: none;
+background-color: transparent;
+
+
+width: 100%;
+display: inherit;
+align-items: inherit;
+justify-content: inherit;
+}
