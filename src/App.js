@@ -34,6 +34,10 @@ const App = () => {
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(null);
     const [isAuthenticated, setisAuthenticated] = useState({status: false, isAdmin: false})
+    const [loading, setloading] = useState(false)
+
+
+
     const main = async () => {
         let transport = axios.create({withCredentials: true});
         console.log("App js", localStorage.getItem('token'))
@@ -79,6 +83,8 @@ const App = () => {
                 {error}            </Alert> : <></>}
             {success ? <Alert key="success" onClose={() => {setSuccess(null)}} className='success br-0' variant="filled" severity="success">
                 {success}            </Alert> : <></>}
+
+            {loading?<Loading/>:""}
             <Switch>
                 <Route exact path='/' component={Home} />
                 <Route exact path='/login' >
@@ -87,15 +93,15 @@ const App = () => {
                 <Route exact path='/admin'>
                     <Admin isAdmin={isAuthenticated.isAdmin} setError={setError} setSuccess={setSuccess} />
                 </Route>
-                <Route path='/event/:eventId'>
-                    <Event setRedirect={setRedirect} isAuthenticated={isAuthenticated} setError={setError} setSuccess={setSuccess} />
+                <Route path='/event/:eventId' >
+                    <Event setRedirect={setRedirect} setloading={setloading} isAuthenticated={isAuthenticated} setError={setError} setSuccess={setSuccess} />
                 </Route>
-                <Route exact path='/signup'>
-                    <SignUp notifySuccess={notifySuccess} setisAuthenticated={setisAuthenticated} isAuthenticated={isAuthenticated} error={error} setError={setError} success={success} setSuccess={setSuccess} />
+                <Route exact path='/signup' >
+                    <SignUp notifySuccess={notifySuccess} setloading={setloading} setisAuthenticated={setisAuthenticated} isAuthenticated={isAuthenticated} error={error} setError={setError} success={success} setSuccess={setSuccess} />
                 </Route>
 
                 <Route exact path='/resetpassword' >
-                    <ForgotPassword notifySuccess={notifySuccess} setisAuthenticated={setisAuthenticated} isAuthenticated={isAuthenticated} error={error} setError={setError} setSuccess={setSuccess} />
+                    <ForgotPassword notifySuccess={notifySuccess} setloading={setloading} setisAuthenticated={setisAuthenticated} isAuthenticated={isAuthenticated} error={error} setError={setError} setSuccess={setSuccess} />
                 </Route>
                 <Route exact path='/spinner'>
                     <Loading/>

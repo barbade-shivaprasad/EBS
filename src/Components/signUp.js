@@ -24,7 +24,7 @@ const theme = createTheme();
 const transport = axios.create({
     withCredentials: true,
 })
-export default function SignUp({setisAuthenticated, isAuthenticated, error, setError, setSuccess, notifySuccess}) {
+export default function SignUp({setisAuthenticated, isAuthenticated, error, setError, setSuccess, notifySuccess,setloading}) {
     const [userSignUp, setUserSignUp] = useState({})
     const [confirmPassword, setConfirmPassword] = useState(null);
     const [sentMail, setSentMail] = useState(false);
@@ -49,11 +49,13 @@ export default function SignUp({setisAuthenticated, isAuthenticated, error, setE
         event.preventDefault();
         console.log(userSignUp)
         if (confirmPassword == userSignUp.password) {
+            setloading(true)
             transport.post(`${REACT_APP_API_URL}/sendmail`, {email: userSignUp.email, shouldExist: false}).then(res => {
                 if (res.status != 200) {
                     throw new Error(res.data)
                 } else {
                     setSentMail(true)
+                    setloading(false)
                     toast.success(`otp successfully sent to ${userSignUp.email}`, {
                         position: "top-right",
                         autoClose: 5000,
@@ -67,6 +69,7 @@ export default function SignUp({setisAuthenticated, isAuthenticated, error, setE
                     setButtonState(false)
                 }
             }).catch(err => {
+                setloading(false)
                 toast.error(`${err.message}`, {
                     position: "top-right",
                     autoClose: 5000,

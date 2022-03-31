@@ -20,7 +20,7 @@ const theme = createTheme();
 const transport = axios.create({
     withCredentials: true,
 })
-export default function ForgotPassword({setError, setSuccess, isAuthenticated, setisAuthenticated, notifySuccesss}) {
+export default function ForgotPassword({setError, setSuccess, isAuthenticated, setloading}) {
     const [userDetails, setUserDetails] = useState({});
     const [otp, setOtp] = useState();
     const [confirmpassword, setConfirmPassword] = useState();
@@ -47,16 +47,22 @@ export default function ForgotPassword({setError, setSuccess, isAuthenticated, s
         console.log(userDetails)
         setButtons({...buttons, sendButton: true})
         e.preventDefault();
+
+        setloading(true)
         transport.post(`${process.env.REACT_APP_API_URL}/sendmail`, {email: userDetails.email, shouldExist: true}).then((res) => {
             if (res.status != 200) {
                 throw new Error(res.data);
             }
 
             Succ('sent mail')
+
+            setloading(false)
+
             setButtons({...buttons, verifyButton: false})
             setOtp("")
         }).catch(err => {
 
+            setloading(false)
             Err(err.message)
             setButtons({...buttons, sendButton: false})
             console.log(err)
@@ -83,17 +89,19 @@ export default function ForgotPassword({setError, setSuccess, isAuthenticated, s
         console.log(userDetails)
         setButtons({...buttons, submitButton: true})
         e.preventDefault();
+        setloading(true)
         if (confirmpassword == userDetails.password) {
             transport.post(`${process.env.REACT_APP_API_URL}/changepassword`, {...userDetails, secret: "asdasdknafnalkdfsdnfusdkljsfs"}).then((res) => {
                 if (res.status != 200) {
                     throw new Error(res.data);
                 }
                 setSuccess("passsword reset successfull");
-                setError(null)
+                setloading(false)
                 setRedirect(true)
             }).catch(err => {
+
+                setloading(false)
                 Err(err.message)
-                setSuccess(null)
                 console.log(err)
             })
         }

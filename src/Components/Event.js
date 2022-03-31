@@ -11,7 +11,7 @@ import Loading from "./Loading";
 
 
 const date = new Date();
-const Event = ({isAuthenticated, setError, setSuccess, setRedirect}) => {
+const Event = ({isAuthenticated, setError, setSuccess, setRedirect,setloading}) => {
     const [isAdmin, setIsAdmin] = useState(false);
     const [buttonState, setButtonState] = useState(false)
     const main = async () => {
@@ -91,7 +91,9 @@ const Event = ({isAuthenticated, setError, setSuccess, setRedirect}) => {
         data["isRegistered"] = true;
         data["isAttended"] = false;
         data["isCancelled"] = false;
-        console.log(data);
+
+        setloading(true);
+
         axios
             .post(url, data, {
                 headers: {
@@ -105,8 +107,8 @@ const Event = ({isAuthenticated, setError, setSuccess, setRedirect}) => {
                 console.log("server response", res.data);
                 setIsRegistered(true);
                 // setSuccess("Registration mail sent.")
-                Succ(res.data)
-                
+                Succ("Registration mail sent.")
+                setloading(false)
                 setError(null)
             })
             .catch((err) => {
@@ -114,7 +116,7 @@ const Event = ({isAuthenticated, setError, setSuccess, setRedirect}) => {
                 Err(err.message)
                 setButtonState(false)
                 setIsRegistered(false)
-                console.log(err)
+                setloading(false)
             });
     };
     return (
