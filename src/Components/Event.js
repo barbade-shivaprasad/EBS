@@ -45,7 +45,7 @@ const Event = ({isAuthenticated, setError, setSuccess, setRedirect,setloading}) 
         if(eventDetails !== null){
 
             let d1 = new Date(eventDetails.date);
-            if(d1 < new Date())
+            if(d1 < new Date().getDate())
             return true
         }
         return false
