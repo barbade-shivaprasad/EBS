@@ -106,7 +106,7 @@ export default function ForgotPassword({setError, setSuccess, isAuthenticated, s
             })
         }
         else {
-
+            setloading(false)
             Err("Password mismatch")
         }
     }
