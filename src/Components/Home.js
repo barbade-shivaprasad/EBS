@@ -110,9 +110,9 @@ const Home = () => {
                 <Box sx={{width: '100%'}}>
                     <Box sx={{borderBottom: 1, borderColor: 'divider'}}>
                         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" centered>
-                            <Tab label="Completed" {...a11yProps(0)} />
                             <Tab label="Ongoing" {...a11yProps(1)} />
                             <Tab label="Upcoming" {...a11yProps(2)} />
+                            <Tab label="Completed" {...a11yProps(0)} />
                         </Tabs>
                     </Box>
                     <TabPanel value={value} index={0}>
