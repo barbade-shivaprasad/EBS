@@ -15,7 +15,7 @@ const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 
 const Slides = ({postsOngoing, postsUpcoming}) => {
-    const [posts, setPosts] = useState([]);
+    const [posts, setPosts] = useState(null);
     const theme = useTheme();
     const [activeStep, setActiveStep] = useState(0);
     let maxSteps = 2;
@@ -43,87 +43,89 @@ const Slides = ({postsOngoing, postsUpcoming}) => {
     }, [])
 
     return (
-        // <div>hellow</div>
-        <div className="carousel-container" style={{backgroundColor:"transparent"}}>
-            <div className="carousel">
-                <Box sx={{}} className='text-center'>
-                    <Paper
-                        square
-                        elevation={0}
-                        sx={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            height: 40,
-                            pl: 2,
-                            bgcolor: "aquamarine",
-                        }}
-                    >
+        <>
+        {posts.length != 0 
+        ? <div className="carousel-container" style={{backgroundColor:"transparent"}}>
+        <div className="carousel">
+            <Box sx={{}} className='text-center'>
+                <Paper
+                    square
+                    elevation={0}
+                    sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        height: 40,
+                        pl: 2,
+                        bgcolor: "aquamarine",
+                    }}
+                >
 
-                    </Paper>
-                    <AutoPlaySwipeableViews
-                        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-                        index={activeStep}
-                        onChangeIndex={handleStepChange}
-                        enableMouseEvents
-                    >
-                        {posts?.map((step, index) => (
-                            <div key={step.title}>
-                                {Math.abs(activeStep - index) <= 2 ? (
-                                    <>
-                                        <div className="typograph">{step.title}</div>
-                                        <Link  to={`/event/${step.eventId}`}>
-                                            <Box
-                                                component="img"
-                                                sx={{
-                                                    display: 'block',
-                                                    height: 400,
-                                                    overflow: 'hidden',
-                                                    width: '100%'
-                                                }}
-                                                src={`${process.env.REACT_APP_API_URL}/admin/getimg/${step.eventId}`}
-                                                alt={step.title}
-                                            />
-                                        </Link>
-                                    </>
-                                ) : null}
-                            </div>
-                        ))}
-                    </AutoPlaySwipeableViews>
-                    <div className='navigationColor'>
-                        <MobileStepper
-                            variant='text'
-                            steps={maxSteps}
-                            position="static"
-                            activeStep={activeStep}
-                            nextButton={
-                                <Button
-                                    size="small"
-                                    onClick={handleNext}
-                                    disabled={activeStep === maxSteps - 1}
-                                >
-                                    Next
-                                    {theme.direction === 'rtl' ? (
-                                        <KeyboardArrowLeft />
-                                    ) : (
-                                        <KeyboardArrowRight />
-                                    )}
-                                </Button>
-                            }
-                            backButton={
-                                <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
-                                    {theme.direction === 'rtl' ? (
-                                        <KeyboardArrowRight />
-                                    ) : (
-                                        <KeyboardArrowLeft />
-                                    )}
-                                    Back
-                                </Button>
-                            }
-                        />
-                    </div>
-                </Box>
-            </div>
+                </Paper>
+                <AutoPlaySwipeableViews
+                    axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+                    index={activeStep}
+                    onChangeIndex={handleStepChange}
+                    enableMouseEvents
+                >
+                    {posts?.map((step, index) => (
+                        <div key={step.title}>
+                            {Math.abs(activeStep - index) <= 2 ? (
+                                <>
+                                    <div className="typograph">{step.title}</div>
+                                    <Link  to={`/event/${step.eventId}`}>
+                                        <Box
+                                            component="img"
+                                            sx={{
+                                                display: 'block',
+                                                height: 400,
+                                                overflow: 'hidden',
+                                                width: '100%'
+                                            }}
+                                            src={`${process.env.REACT_APP_API_URL}/admin/getimg/${step.eventId}`}
+                                            alt={step.title}
+                                        />
+                                    </Link>
+                                </>
+                            ) : null}
+                        </div>
+                    ))}
+                </AutoPlaySwipeableViews>
+                <div className='navigationColor'>
+                    <MobileStepper
+                        variant='text'
+                        steps={maxSteps}
+                        position="static"
+                        activeStep={activeStep}
+                        nextButton={
+                            <Button
+                                size="small"
+                                onClick={handleNext}
+                                disabled={activeStep === maxSteps - 1}
+                            >
+                                Next
+                                {theme.direction === 'rtl' ? (
+                                    <KeyboardArrowLeft />
+                                ) : (
+                                    <KeyboardArrowRight />
+                                )}
+                            </Button>
+                        }
+                        backButton={
+                            <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
+                                {theme.direction === 'rtl' ? (
+                                    <KeyboardArrowRight />
+                                ) : (
+                                    <KeyboardArrowLeft />
+                                )}
+                                Back
+                            </Button>
+                        }
+                    />
+                </div>
+            </Box>
         </div>
+    </div>:""}</>
+        
     );
 }
 

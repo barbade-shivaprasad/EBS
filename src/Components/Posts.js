@@ -30,7 +30,7 @@ const Posts = ({posts, loading}) => {
     if (loading) {
         return <Loading/>
     }
-    if (posts?.length == 0) return <h1> NO EVENTS</h1>
+    if (posts?.length == 0) return <div style={{height:'50vh'}}><h1> NO EVENTS</h1></div>
     // console.log("posts", posts)
     return (
         <>
