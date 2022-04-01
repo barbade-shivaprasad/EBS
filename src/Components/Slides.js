@@ -15,7 +15,7 @@ const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 
 const Slides = ({postsOngoing, postsUpcoming}) => {
-    const [posts, setPosts] = useState(null);
+    const [posts, setPosts] = useState([]);
     const theme = useTheme();
     const [activeStep, setActiveStep] = useState(0);
     let maxSteps = 2;
