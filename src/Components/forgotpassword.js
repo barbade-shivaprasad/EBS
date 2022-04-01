@@ -95,7 +95,7 @@ export default function ForgotPassword({setError, setSuccess, isAuthenticated, s
                 if (res.status != 200) {
                     throw new Error(res.data);
                 }
-                setSuccess("passsword reset successfull");
+                Succ("passsword reset successfull");
                 setloading(false)
                 setRedirect(true)
             }).catch(err => {

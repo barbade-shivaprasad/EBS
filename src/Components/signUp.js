@@ -15,6 +15,7 @@ import {createTheme, ThemeProvider} from '@mui/material/styles';
 import Verify from './verify'
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Err } from '../hocs/toaster';
 
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
@@ -47,8 +48,11 @@ export default function SignUp({setisAuthenticated, isAuthenticated, error, setE
         setButtonState(true)
         console.log(process.env.REACT_APP_URL)
         event.preventDefault();
-        console.log(userSignUp)
-        if (confirmPassword == userSignUp.password) {
+
+        if(userSignUp.password.length < 8)
+        Err("Password length must be atleast 8 characters long")
+
+        else if (confirmPassword == userSignUp.password) {
             setloading(true)
             transport.post(`${REACT_APP_API_URL}/sendmail`, {email: userSignUp.email, shouldExist: false}).then(res => {
                 if (res.status != 200) {
