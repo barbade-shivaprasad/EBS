@@ -10,7 +10,6 @@ import {Err,Succ} from '../hocs/toaster'
 import Loading from "./Loading";
 
 
-const date = new Date();
 const Event = ({isAuthenticated, setError, setSuccess, setRedirect,setloading}) => {
     const [isAdmin, setIsAdmin] = useState(false);
     const [buttonState, setButtonState] = useState(false)
@@ -40,12 +39,14 @@ const Event = ({isAuthenticated, setError, setSuccess, setRedirect,setloading}) 
     console.log(isregistered);
 
     const isEventCompleted = () => {
+        let yourDate = new Date()
+        yourDate = yourDate.toISOString().split('T')[0]
         // let eventDate = eventDetails.updatedAt;
         // console.log("hello world", date.getDate(), date.getMonth(), date.getFullYear(), parseInt(eventDetails?.date.slice(0, 4)), parseInt(eventDetails?.date.slice(5, 7)), parseInt(eventDetails?.date.slice(8, 10)))
         if(eventDetails !== null){
 
             let d1 = new Date(eventDetails.date);
-            if(d1 < new Date().getDate())
+            if(d1.getTime() < new Date(yourDate).getTime())
             return true
         }
         return false
@@ -166,14 +167,12 @@ const Event = ({isAuthenticated, setError, setSuccess, setRedirect,setloading}) 
                             }
                             <div className="buttonDiv">
                                 {!isregistered ? (
-                                    <button
+                                    (!buttonState && !isEventCompleted())?<button
                                         type="button"
                                         className="btn btn-success btn-lg btn-block"
-                                        onClick={(e) => registerHandler(e)}
-                                        disabled={buttonState || isEventCompleted()}
-                                    >
-                                        Register
-                                    </button>
+                                        onClick={(e) => registerHandler(e)}  
+                                    >Register
+                                    </button>:""
                                 ) : (
                                     <button
                                         type="text"
